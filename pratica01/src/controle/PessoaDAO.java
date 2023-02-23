@@ -9,44 +9,60 @@ import java.util.ArrayList;
 import modelo.Pessoa;
 
 public class PessoaDAO {
-	
+
 	private Conexao con;
-	
+
 	public boolean inserir(Pessoa p) {
-		
+
 		con = Conexao.getInstancia();
 		Connection c = con.conectar();
 		try {
 			String query = "INSERT INTO pessoa (cpf, nome) VALUES (?,?);";
 			PreparedStatement stm = c.prepareStatement(query);
-			
+
 			stm.setInt(1, 123);
 			stm.setString(2, "Banco");
 			stm.executeUpdate();
-		
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		con.fecharConexao();
-		
+
 		return false;
 	}
+
 	public boolean atualizar(Pessoa p) {
+		con = Conexao.getInstancia();
+		Connection c = con.conectar();
+		try {
+			String query = "UPDATE pessoa SET nome = ? WHERE cpf = ?";
+			PreparedStatement stm = c.prepareStatement(query);
+			stm.setString(1, p.getNome());
+			stm.setLong(2, p.getCpf());
+			stm.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		con.fecharConexao();
 		return false;
 	}
+
 	public boolean deletar(Pessoa p) {
 		return false;
 	}
+
 	public ArrayList<Pessoa> listarPessoa() {
 		ArrayList<Pessoa> pessoas = new ArrayList<>();
-		
+
 		con = Conexao.getInstancia();
 		Connection c = con.conectar();
 		try {
 			Statement stm = c.createStatement();
 			String query = "SELECT * FROM pessoa";
 			ResultSet rs = stm.executeQuery(query);
-			while (rs.next() ) {
+			while (rs.next()) {
 				int cpf = rs.getInt("cpf");
 				String nome = rs.getString("nome");
 				Pessoa p = new Pessoa();
@@ -54,7 +70,7 @@ public class PessoaDAO {
 				p.setNome(nome);
 				pessoas.add(p);
 			}
-		
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
