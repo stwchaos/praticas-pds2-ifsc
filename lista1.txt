@@ -1,0 +1,32 @@
+1) Uma biblioteca no contexto de programação trata-se de um conjunto de funções e recursos pré-escritas que podem ser utilizados na programação como um auxílio. API (Application Programming Interface) trata-se de uma interface que permite que um programa se comunique com outro programa ou sistema, permitindo o acesso a recursos externos.
+
+
+2) a) MVC -> MVC (Model-View-Controller)trata-se de padrão de projeto estruturado em: Model, View e Controller. O modelo sendo responsável por gerenciar os dados da aplicação, a visão é onde as telas ficarão, apresentando ao usuário a aplicação e o controlador é responsável por receber e gerenciar as entradas dos usuários e coordenar a interação entre o modelo e a visão. O padrão MVC é utilizado principal,mente em desenvolvimento web e desktop para criar aplicativos escaláveis e modulares.
+
+
+b) DAO -> DAO (Data Access Object) trata-se de padrão de projeto consistindo na separação da lógica de acesso a dados do rchatesto da aplicação. Ele fornece uma camada de abstração entre o banco de dados e o restante do aplicativo, permitindo que a lógica de acesso a dados seja facilmente modificada sem afetar o restante do código. O padrão DAO é frequentemente utilizado em aplicativos que exigem acesso a banco de dados, como aplicativos empresariais.
+
+
+c) Singleton -> Singleton é um padrão de projeto que garante que uma classe tenha apenas uma instância e fornece um ponto de acesso global para essa instância. Isso é útil para classes que precisam ter apenas uma instância em toda a aplicação, como classes de configuração, gerenciadores de conexão de banco de dados e gerenciadores de log. O padrão Singleton ajuda a controlar a criação de instâncias de uma classe e pode melhorar o desempenho da aplicação. A utilização deste padrão busca soluções simples e comuns para provlemas de mesmo nível.
+
+3) JDBC (Java Database Connectivity) trata-se de uma API padrão do Java. Ele permite que aplicativos Java se conectem a bancos de dadose interajam executando operações fornecendo uma camada de abstração entre o aplicativo e o banco.
+
+
+4) CRUD se trata de quatro operações básicas de um sistema de gerenciamento de banco de dados, sendo elas: CREATE, READ, UPDATE, DELETE. Tais métodos estão comumente ligados e implementados em DAO, permitindo um CRUD de um banco feita de maneira organização e simples.
+
+
+5) Connection -> Utilizada para estabelecer conexão em banco de dados;
+
+
+PreparedStatement -> Utilizada para preparar instruções SQL com parâmetros;
+
+
+Statement -> Utilizada para executar instruções SQL no banco de dados.
+
+
+
+6) Devemos utilizar a classe Statement pois ele é o único com retorno.
+
+
+
+7) SWING é utilizado sem interface gráfica no auxílio da elaboração de telas, sendo uma ferrmaneta já incluída. Por outro lado, WINDOWBUILDER conta com uma interface gráfica possibilitando arrastar componentes, sendo uma extensão.
