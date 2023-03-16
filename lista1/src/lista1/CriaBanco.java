@@ -20,8 +20,8 @@ public class CriaBanco {
 			criaBanco = "USE " + bd;
 			statement.executeUpdate(criaBanco);			
 			
-			String criaTabela = "CREATE TABLE IF NOT EXISTS pessoa " + "cpf BEGINT(12) NOT NULL " + "nome VARCHAR(100) "
-					+ "PRIMARY KEY (cpf))";
+			String criaTabela = "CREATE TABLE IF NOT EXISTS pessoa " + "usuario VARCHAR(100) NOT NULL " + "nome VARCHAR(100) "
+					+ "PRIMARY KEY (usuario))";
 			statement.executeUpdate(criaTabela);
 
 		} catch (Exception e) {
