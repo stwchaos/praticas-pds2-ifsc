@@ -1,26 +1,33 @@
 package lista1;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import java.awt.Font;
 import java.awt.Color;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import net.miginfocom.swing.MigLayout;
 
 public class Tela extends JFrame {
 
+	private String user = "root", pwd = "aluno", banco = "banco";
+	private Connection conexao;
 	private JPanel contentPane;
-	private JPasswordField passwordField;
-	private JTextField txtUsuario;
+	private JTextField txtProduto;
+	private JTextField txtCidade;
+	private JTextField txtPreco;
 
 	/**
 	 * Launch the application.
@@ -42,6 +49,7 @@ public class Tela extends JFrame {
 	 * Create the frame.
 	 */
 	public Tela() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1051, 559);
 		contentPane = new JPanel();
@@ -54,40 +62,81 @@ public class Tela extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, "cell 1 1,grow");
-		panel.setLayout(new MigLayout("", "[grow][318px,grow][grow]", "[200px][grow][][][][][][grow][grow][]"));
+		panel.setLayout(new MigLayout("", "[grow][318px,grow][grow]", "[200px][grow][][][][][][][][grow][][grow][]"));
 		
 		JLabel lblNewLabel = new JLabel("Ellie Williams ");
 		panel.add(lblNewLabel, "cell 1 0,alignx left,aligny top");
 		lblNewLabel.setFont(new Font("Yu Gothic Light", Font.PLAIN, 20));
 		lblNewLabel.setIcon(new ImageIcon(Tela.class.getResource("/lista1/ellieIcon (2).png")));
 		
-		JLabel lblNewLabel_1 = new JLabel("Confirme seu login");
+		JLabel lblNewLabel_1 = new JLabel("Registre um produto");
 		lblNewLabel_1.setFont(new Font("Yu Gothic Medium", Font.PLAIN, 15));
 		panel.add(lblNewLabel_1, "cell 1 2,alignx center,aligny center");
 		
-		JLabel lblNewLabel_3 = new JLabel("usuario");
+		JLabel lblNewLabel_3 = new JLabel("Produto");
 		lblNewLabel_3.setIcon(new ImageIcon(Tela.class.getResource("/lista1/user_icon.png")));
 		panel.add(lblNewLabel_3, "cell 1 3");
 		
-		txtUsuario = new JTextField();
-		panel.add(txtUsuario, "cell 1 4,grow");
-		txtUsuario.setColumns(10);
+		txtProduto = new JTextField();
+		panel.add(txtProduto, "cell 1 4,grow");
+		txtProduto.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("senha");
-		lblNewLabel_2.setIcon(new ImageIcon(Tela.class.getResource("/lista1/lock_icon.png")));
+		JLabel lblNewLabel_2 = new JLabel("Preço");
 		panel.add(lblNewLabel_2, "cell 1 5");
-		
-		passwordField = new JPasswordField();
-		panel.add(passwordField, "cell 1 6,grow");
 		
 		JButton btnNewButton = new JButton("Confirmar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					conexao = DriverManager.getConnection("jdbc:mysql://localhost/"+banco+"?serverTimezone=UTC", user, pwd);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				String cidade = null, produto = null;
+				Double preco = null;
+				
+				if(!txtCidade.getText().isBlank()) {
+					cidade = txtCidade.getText();
+				}
+				if(!txtProduto.getText().isBlank()) {
+					produto = txtProduto.getText();
+				}
+				if(!txtPreco.getText().isBlank()) {
+					preco = Double.valueOf(txtPreco.getText());
+				}
+								
+				try {
+					String query = "INSERT INTO produtos (cidade, produto, preco) VALUES (?, ?, ?);";
+					PreparedStatement stm = conexao.prepareStatement(query);
+					
+					stm.setString (1, cidade);
+					stm.setString (2, produto);
+					stm.setDouble (3, preco);
+					stm.executeUpdate();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				
 			}
 		});
+		
+		txtPreco = new JTextField();
+		txtPreco.setColumns(10);
+		panel.add(txtPreco, "cell 1 6,growx");
+		
+		JLabel lblNewLabel_3_1 = new JLabel("Cidade");
+		panel.add(lblNewLabel_3_1, "cell 1 8");
+		
+		txtCidade = new JTextField();
+		txtCidade.setColumns(10);
+		panel.add(txtCidade, "cell 1 9,growx");
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(0, 0, 0));
-		panel.add(btnNewButton, "cell 1 8,alignx center,aligny bottom");
+		panel.add(btnNewButton, "cell 1 11,alignx center,aligny bottom");
+		
+		
 	}
 }

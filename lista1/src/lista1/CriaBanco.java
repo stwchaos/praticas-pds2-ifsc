@@ -7,11 +7,11 @@ import java.sql.Statement;
 public class CriaBanco {
 	public static void main(String[] args) {
 		String url = "jdbc:mysql://localhost/";
-		String usuario = "root";
-		String senha = "aluno";
+		String user = "root";
+		String pwd = "aluno";
 
 		try {
-			Connection conexao = DriverManager.getConnection(url,usuario,senha);
+			Connection conexao = DriverManager.getConnection(url,user,pwd);
 			Statement statement = conexao.createStatement();
 			String bd = "Banco";
 			String criaBanco = "CREATE DATABASE IF NOT EXISTS " + bd;
@@ -20,8 +20,7 @@ public class CriaBanco {
 			criaBanco = "USE " + bd;
 			statement.executeUpdate(criaBanco);			
 			
-			String criaTabela = "CREATE TABLE IF NOT EXISTS pessoa " + "usuario VARCHAR(100) NOT NULL " + "nome VARCHAR(100) "
-					+ "PRIMARY KEY (usuario))";
+			String criaTabela = "CREATE TABLE IF NOT EXISTS produtos (codigo INT NOT NULL PRIMARY KEY AUTO_INCREMENT, produto VARCHAR(45), preco BIGINT, cidade VARCHAR(45));";
 			statement.executeUpdate(criaTabela);
 
 		} catch (Exception e) {
