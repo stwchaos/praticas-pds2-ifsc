@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -62,19 +61,18 @@ public class Tela extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, "cell 1 1,grow");
-		panel.setLayout(new MigLayout("", "[grow][318px,grow][grow]", "[200px][grow][][][][][][][][grow][][grow][]"));
+		panel.setLayout(new MigLayout("", "[grow][318px,grow][grow]", "[200px][grow][][][][][][][grow][][grow][grow][]"));
 		
 		JLabel lblNewLabel = new JLabel("Ellie Williams ");
 		panel.add(lblNewLabel, "cell 1 0,alignx left,aligny top");
 		lblNewLabel.setFont(new Font("Yu Gothic Light", Font.PLAIN, 20));
 		lblNewLabel.setIcon(new ImageIcon(Tela.class.getResource("/lista1/ellieIcon (2).png")));
 		
-		JLabel lblNewLabel_1 = new JLabel("Registre um produto");
+		JLabel lblNewLabel_1 = new JLabel("Registre um produto na dispensa");
 		lblNewLabel_1.setFont(new Font("Yu Gothic Medium", Font.PLAIN, 15));
 		panel.add(lblNewLabel_1, "cell 1 2,alignx center,aligny center");
 		
 		JLabel lblNewLabel_3 = new JLabel("Produto");
-		lblNewLabel_3.setIcon(new ImageIcon(Tela.class.getResource("/lista1/user_icon.png")));
 		panel.add(lblNewLabel_3, "cell 1 3");
 		
 		txtProduto = new JTextField();
@@ -128,14 +126,27 @@ public class Tela extends JFrame {
 		panel.add(txtPreco, "cell 1 6,growx");
 		
 		JLabel lblNewLabel_3_1 = new JLabel("Cidade");
-		panel.add(lblNewLabel_3_1, "cell 1 8");
+		panel.add(lblNewLabel_3_1, "cell 1 7");
 		
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		panel.add(txtCidade, "cell 1 9,growx");
+		panel.add(txtCidade, "cell 1 8,growx");
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(0, 0, 0));
-		panel.add(btnNewButton, "cell 1 11,alignx center,aligny bottom");
+		panel.add(btnNewButton, "cell 1 10,alignx center,aligny bottom");
+		
+		JButton btnLista = new JButton("Acessar lista");
+		btnLista.setForeground(Color.WHITE);
+		btnLista.setBackground(Color.BLACK);
+		btnLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					dispose();
+					TelaJTable telaTabela = new TelaJTable();
+					telaTabela.setLocationRelativeTo(null);
+					telaTabela.setVisible(true);
+			}
+		});
+		panel.add(btnLista, "cell 1 12,alignx center,aligny center");
 		
 		
 	}
